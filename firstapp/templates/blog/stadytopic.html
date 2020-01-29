@@ -6,8 +6,10 @@
     <i class="fa fa-text-width"></i>
     <h3 class="box-title">{{ stadytopic.title }}</h3>
   </div>
+  {% if stadytopic.picture %}
   <img class="img-center" src="{{ stadytopic.picture.url }}">
   <!-- /.box-header -->
+  {% endif %}
   <div class="box-body">
     {{ stadytopic.text }}
   </div>

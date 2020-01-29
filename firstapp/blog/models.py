@@ -28,6 +28,7 @@ class StadyProgram(models.Model):
     #Градация программ обучения
     stadyfield = models.ForeignKey(StadyField, null = True, on_delete=models.SET_NULL)
     name = models.CharField(max_length=30, verbose_name="Программа обучения")
+    fullname = models.TextField(default='', verbose_name="Полное название")
 
     class Meta:
         verbose_name_plural = "Программы обучения"
@@ -38,6 +39,7 @@ class StadyProgram(models.Model):
 class StadyModul(models.Model):
     #Градация программ обучения
     stadyprogram = models.ForeignKey(StadyProgram, null = True, on_delete=models.SET_NULL)
+    ordermodul =  models.IntegerField(default=0, verbose_name="Порядковый номер")
     name = models.CharField(max_length=255, verbose_name="Модуль обучения")
 
     class Meta:
@@ -46,11 +48,16 @@ class StadyModul(models.Model):
     def __str__(self):
         return (self.name)
 
+    def get_topic(self):
+        return self.stadytopic_set.all()
+
+
 class StadyTopic(models.Model):
     #Градация области обучения
     stadyfield = models.ForeignKey(StadyField, null = True, on_delete=models.SET_NULL, verbose_name="Модуль обучения")
     stadyprogram = models.ForeignKey(StadyProgram, null = True, on_delete=models.SET_NULL, verbose_name="Программа обучения")
     stadymodul = models.ForeignKey(StadyModul, null = True, on_delete=models.SET_NULL, verbose_name="Модуль обучения")
+    ordertopic =  models.IntegerField(default=0, verbose_name="Порядковый номер")
     title = models.CharField(max_length=30, verbose_name="Заголовок",)
     picture = models.ImageField('Картинка',upload_to = 'blog/picture/', default = '', blank = True)
     text = models.TextField()
