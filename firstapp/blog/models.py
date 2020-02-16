@@ -60,7 +60,7 @@ class StadyTopic(models.Model):
     ordertopic =  models.IntegerField(default=0, verbose_name="Порядковый номер")
     title = models.CharField(max_length=30, verbose_name="Заголовок",)
     picture = models.ImageField('Картинка',upload_to = 'blog/picture/', default = '', blank = True)
-    text = models.TextField()
+    text = models.TextField(verbose_name="Текст вопроса")
     release_date = models.DateField(verbose_name="Дата создания")
     update_date = models.DateField(verbose_name="Дата обновления")
     num_stars = models.IntegerField(verbose_name="Рейтинг")
