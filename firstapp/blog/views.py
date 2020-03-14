@@ -19,19 +19,19 @@ class TopicDetailView(PermissionGroupMixin, View):
         return render(request, 'blog/stadytopic.html', {"stadytopic": stadytopic})
 
 
-class GetMyProgramms(LoginRequiredMixin, View):
-    permission_group = 'listener'
+class GetMyProgramms(PermissionGroupMixin, View):
+    permission_required = ['listener', 'admin']
     def get(self, request):
         stadyprogram = StadyProgram.objects.all()
         return render(request, 'blog/program.html', {"stadyprogram": stadyprogram})
 
-class StadyProgramList(LoginRequiredMixin, View):
-    permission_group = ('listener', 'teacher')
+class StadyProgramList(PermissionGroupMixin, View):
+    permission_required = ['listener', 'admin']
     id_user_programm = 1 #Временно указвваем id программы по которйй пользователь будет обучатся.
 
-    def get(self, request):
-        stadymoduls = StadyModul.objects.all().filter(stadyprogram_id = self.id_user_programm).order_by('ordermodul')
-        stadytopics = StadyTopic.objects.all().filter(stadyprogram_id = self.id_user_programm).order_by('ordertopic')
+    def get(self, request, pk):
+        stadymoduls = StadyModul.objects.all().filter(stadyprogram_id = pk).order_by('ordermodul')
+        stadytopics = StadyTopic.objects.all().filter(stadyprogram_id = pk).order_by('ordertopic')
 
         return render(request, 'blog/programlist.html', {"stadymoduls": stadymoduls, "stadytopics": stadytopics})
 

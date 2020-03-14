@@ -13,16 +13,21 @@ class Question(models.Model):
         verbose_name_plural = "Воросы к тесту"
 
     def __str__(self):
-        return (self.name)
+        return (self.text)
 
 class Answer(models.Model):
     #Градация уровня обучения
-    question = models.ForeignKey(Question, null = True, on_delete=models.SET_NULL, verbose_name="Программа обучения")
-    text = models.TextField(verbose_name="Текст вопроса")
+    question = models.ForeignKey(Question, null = True, on_delete=models.SET_NULL, verbose_name="Ответы к вопросам")
+    text = models.TextField(verbose_name="Текст ответа")
     check = models.IntegerField(verbose_name="Правильный ответ")
 
     class Meta:
         verbose_name_plural = "Оветы к вопросам"
 
     def __str__(self):
-        return (self.name)
+        return (self.text)
+
+#class Trainings(models.Model)
+    #user = models.ForeignKey(User)
+    ##programm = #здесь внешинй на программу
+    #questions = models.ManyToMany(Qustions) #связь с вопросами. Список примари кей.

@@ -54,13 +54,13 @@ class StadyModul(models.Model):
 
 class StadyTopic(models.Model):
     #Градация области обучения
-    stadyfield = models.ForeignKey(StadyField, null = True, on_delete=models.SET_NULL, verbose_name="Модуль обучения")
+    stadyfield = models.ForeignKey(StadyField, null = True, on_delete=models.SET_NULL, verbose_name="Область обучения")
     stadyprogram = models.ForeignKey(StadyProgram, null = True, on_delete=models.SET_NULL, verbose_name="Программа обучения")
     stadymodul = models.ForeignKey(StadyModul, null = True, on_delete=models.SET_NULL, verbose_name="Модуль обучения")
     ordertopic =  models.IntegerField(default=0, verbose_name="Порядковый номер")
     title = models.CharField(max_length=30, verbose_name="Заголовок",)
     picture = models.ImageField('Картинка',upload_to = 'blog/picture/', default = '', blank = True)
-    text = models.TextField(verbose_name="Текст вопроса")
+    text = models.TextField(verbose_name="Содержание")
     release_date = models.DateField(verbose_name="Дата создания")
     update_date = models.DateField(verbose_name="Дата обновления")
     num_stars = models.IntegerField(verbose_name="Рейтинг")
