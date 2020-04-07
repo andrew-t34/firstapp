@@ -6,12 +6,12 @@
 <div class="margin">
   <div class="btn-group">
     {% for numb, values in questions.items %}
-      {% if values.check == 1 %}
-          <a href="{% url 'training' numb  %}" type="button" class="btn btn-success btn-sm">
+      {% if numb == numquest %}
+          <a href="{% url 'training' numb  %}" type="button" class="btn btn-warning btn-sm">
         {% elif values.check == 0 %}
           <a href="{% url 'training' numb  %}" type="button" class="btn btn-danger btn-sm">
-        {% elif numb == numquest %}
-          <a href="{% url 'training' numb  %}" type="button" class="btn btn-warning btn-sm">
+        {% elif values.check == 1 %}
+          <a href="{% url 'training' numb  %}" type="button" class="btn btn-success btn-sm">
         {% else %}
           <a href="{% url 'training' numb  %}" type="button" class="btn btn-default btn-sm">
         {% endif%}
@@ -31,23 +31,41 @@
         {% csrf_token %}
           <div class="box-body">
             <div class="form-group">
-              {% if answers %}
-                {% for answer in answers %}
-                  <div class="checkbox">
-                    <label>
-                      <input type="radio" name = "{{ numquest }}" value="{{ answer.id }}">
-                      {{ answer.text }}
-                    </label>
-                  </div>
-                {% endfor %}
-              {% endif%}
+              {% for radio in form.user_answer %}
+              <div class="myradio">
+                {{ radio }}
+              </div>
+              {% endfor %}
             </div>
           </div>
               <!-- /.box-body -->
           <div class="box-footer">
-            <button type="submit" class="btn btn-success"">Ответить</button>
+            <input type="submit" class="btn btn-success"">
+            <button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#modal-info">
+              Смотреть
+            </button>
           </div>
       </form>
-      <!-- /.box-footer-->
+        <!-- /.box-footer-->
 </div>
+ <div class="modal modal-info fade" id="modal-info">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Информационный блок</h4>
+      </div>
+      <div class="modal-body">
+        <p>One fine body&hellip;</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 {% endblock %}

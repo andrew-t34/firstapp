@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionGroupMixin
+# from django.contrib.auth.mixins import LoginRequiredMixin, PermissionGroupMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
+from permission.views import PermissionGroupMixin
 from django.views.generic.base import View
 from .models import StadyTopic, StadyProgram, StadyModul
 from django.contrib.auth.models import User

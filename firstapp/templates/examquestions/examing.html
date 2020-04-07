@@ -1,0 +1,48 @@
+{% extends 'adminlte/base.html' %}
+
+
+
+{% block content %}
+<div class="margin">
+  <div class="btn-group">
+    {% for numb, values in questions.items %}
+      {% if numb == numquest %}
+          <a href="{% url 'examing' numb  %}" type="button" class="btn btn-warning btn-sm">
+        {% elif values.check == 0 %}
+          <a href="{% url 'examing' numb  %}" type="button" class="btn btn-danger btn-sm">
+        {% elif values.check == 1 %}
+          <a href="{% url 'examing' numb  %}" type="button" class="btn btn-success btn-sm">
+        {% else %}
+          <a href="{% url 'examing' numb  %}" type="button" class="btn btn-default btn-sm">
+        {% endif%}
+          Вопрос № {{ numb }}</a>
+        {% endfor %}
+      </div>
+  </div>
+  <div class="box">
+    <div class="box-header with-border">
+      {% for key, value in questions.items %}
+        {% if key == numquest %}
+          <h3 class="box-title">{{ value.textques }}</h3>
+        {% endif%}
+      {% endfor %}
+    </div>
+      <form class="" action="{% url 'examing' numquest  %}" method="post">
+        {% csrf_token %}
+          <div class="box-body">
+            <div class="form-group">
+              {% for radio in form.user_answer %}
+              <div class="myradio">
+                {{ radio }}
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+              <!-- /.box-body -->
+          <div class="box-footer">
+            <button type="submit" class="btn btn-success" ">Ответить</button>
+          </div>
+      </form>
+        <!-- /.box-footer-->
+<!-- /.modal -->
+{% endblock %}
