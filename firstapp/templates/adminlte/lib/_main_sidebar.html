@@ -31,7 +31,7 @@
                 </li>
                 <li class="treeview">
                     <a href="">
-                        <i class="fa fa-group"></i> <span>Новое линк</span>
+                        <i class="fa fa-group"></i> <span>Учебный центр</span>
                         <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
                         </span>
@@ -39,10 +39,31 @@
                     <ul class="treeview-menu">
                         <li>
                             <a href="{% url 'stadyprogram' %}">
-                                <i class="fa fa-user"></i> Another link
+                                <i class="fa fa-user"></i>Активные программы
                             </a>
                         </li>
                     </ul>
+                </li>
+                <li class="treeview">
+                    <a href="">
+                        <i class="fa fa-group"></i> <span>Моя организация</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li>
+                            <a href="{% url 'main_company' %}">
+                                <i class="fa fa-user"></i>Подробно
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'stadyprogram' %}">
+                                <i class="fa fa-user"></i>Сотрудники
+                            </a>
+                        </li>
+                    </ul>
+
                 </li>
             {% endblock nav_links %}
             {% endblock nav_links_outer %}

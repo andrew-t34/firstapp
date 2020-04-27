@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'main',
     'blog',
     'examquestions',
-
+    'company',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [

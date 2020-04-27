@@ -24,8 +24,8 @@ class AnswerForm(forms.Form):
             initial = user_answer)
 
 
-class TestForm(forms.Form):
-    CHOICES = [('1', 'First'), ('2', 'Second')]
-    #print(type(CHOICES[1]))
-    # CHOICES = {'11': 'Вообще ни каких.. Херней занимается всегда.', '12': 'Работает как лошадь... И жнец и на трубе дудец', '13': 'Смотрите статью ТК РФ... Сам не знаю'}
-    choice_field = forms.ChoiceField(widget = forms.RadioSelect, choices = CHOICES)
+# class TestForm(forms.Form):
+#     CHOICES = [('1', 'First'), ('2', 'Second')]
+#     #print(type(CHOICES[1]))
+#     # CHOICES = {'11': 'Вообще ни каких.. Херней занимается всегда.', '12': 'Работает как лошадь... И жнец и на трубе дудец', '13': 'Смотрите статью ТК РФ... Сам не знаю'}
+#     choice_field = forms.ChoiceField(widget = forms.RadioSelect, choices = CHOICES)
