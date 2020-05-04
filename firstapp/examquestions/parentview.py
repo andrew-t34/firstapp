@@ -10,6 +10,7 @@ from examquestions.forms import AnswerForm
 
 class ParentTestList(PermissionGroupMixin, View):
     permission_required = ['listener', 'admin']
+<<<<<<< HEAD
     # permission_required = ['listener']
     def __init__(self):
         # self.num_question задали как строковое значение для выбора вопроса № по умолчанию в сессии.
@@ -35,12 +36,17 @@ class ParentTestList(PermissionGroupMixin, View):
         # Проверяем есть ли в сессии словарь с ключем user_answers. Если нет создаем.
         self.set_user_answer(request, pk, self.user_answer)
 
+=======
+
+
+>>>>>>> 9ae2595edc73348e4848f3ec4d26be7368b7c1c3
     def getQuestionsByIdProgramm(self, request, id, max_questions):
         if 'questions' not in request.session:
             #В этом варианте id это id программы прграммы обучения.
             questions = Question.objects.all().filter(stadyprogram_id = id)
             questions = random.sample(list(questions), max_questions)
             listquestions = {}
+<<<<<<< HEAD
             # Записываем при момощи итерации данные в сессию.
             for n, question in enumerate(questions):
                 listquestions.setdefault(str(n+1), dict(id = question.id, textques =  question.text, check = 'none'))
@@ -67,3 +73,20 @@ class ParentTestList(PermissionGroupMixin, View):
 
 class ParentResultScore(PermissionGroupMixin, View):
     pass
+=======
+            for n, question in enumerate(questions):
+                listquestions.setdefault(str(n+1), dict(id = question.id, textques =  question.text, check = 'none'))
+            request.session['questions'] = listquestions
+            questions = listquestions
+            self.num_question = 1
+        else:
+            #В этом варианте id это порядковый номер вопроса записанный в сессию
+            self.num_question = id
+            questions = request.session['questions']
+        return questions
+
+
+    def getanswers(self, pk):
+        answers = Answer.objects.all().filter(question_id = pk)
+        return answers
+>>>>>>> 9ae2595edc73348e4848f3ec4d26be7368b7c1c3
