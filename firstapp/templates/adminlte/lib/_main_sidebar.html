@@ -7,7 +7,7 @@
         {% block user_panel %}
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="" class="img-circle" alt="User Image">
+                <img src="/media/andrew.jpg" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
                 <p>{% firstof request.user.get_full_name request.user.username %}</p>
@@ -31,7 +31,7 @@
                 </li>
                 <li class="treeview">
                     <a href="">
-                        <i class="fa fa-group"></i> <span>Учебный центр</span>
+                        <i class="fa fa-graduation-cap"></i> <span>Учебный центр</span>
                         <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
                         </span>
@@ -46,7 +46,7 @@
                 </li>
                 <li class="treeview">
                     <a href="">
-                        <i class="fa fa-group"></i> <span>Моя организация</span>
+                        <i class="fa fa-institution"></i> <span>Моя организация</span>
                         <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
                         </span>

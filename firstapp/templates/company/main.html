@@ -1,53 +1,78 @@
 {% extends 'adminlte/base.html' %}
 
 {% block content %}
+<small class="label pull-right bg-green">new</small>
 <div class="box">
+  <!-- {{ request.session.company }} -->
   {% if company %}
-            <div class="box-header">
-              <h3 class="box-title">Список компаний</h3>
-              <a href="{% url  'company_control' %}" type="submit" class="btn btn-info pull-right">Создать компанию</a>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body no-padding">
-              <table class="table table-condensed">
-                <tbody><tr>
-                  <th style="width: 10px">#</th>
-                  <th style="width: 200px">Название компании</th>
-                  <th style="width: 70px">ОГРН</th>
-                  <th style="width: 70px">ИНН</th>
-                  <th style="width: 70px">Дата создания</th>
-                  <th style="width: 70px">
+  <div class="box-header">
+    <h3 class="box-title">Список компаний</h3>
+    <a href="{% url  'company_create' %}" type="submit" class="btn btn-info pull-right">Создать компанию</a>
+  </div>
+  <!-- /.box-header -->
+  <div class="box-body no-padding">
+    <table class="table table-condensed">
+      <tbody><tr>
+        <th style="width: 10px">#</th>
+        <th ></th>
+        <th >Название компании</th>
+        <th >ОГРН</th>
+        <th >ИНН</th>
+        <th >Дата создания</th>
+        <th ></th>
+        <th ></th>
+        <th ></th>
+        <th ></th>
+        <th ></th>
+      </tr>
+      {% for i in company %}
 
-                  </th>
-                </tr>
-                {% for i in company %}
-
-                <tr>
-                  <td>1.</td>
-                  <td>
-                    {{ i.name }}
-                  </td>
-                  <td>
-                    {{ i.ogrn }}
-                  </td>
-                  <td>
-                    {{ i.inn }}
-                  </td>
-                  <td>
-                    {{ i.date_create }}
-                  </td>
-                  <td>
-                  <a href="{% url  'company_control' %}">
-                    <i class="fa fa-edit"></i>
-                  </a>
-                  </td>
-                </tr>
-                {% endfor %}
-              </tbody></table>
-            </div>
-            <!-- /.box-body -->
-          {% else %}
-            <a href="{% url  'company_control' %}" type="button" class="btn btn-block btn-success btn-lg">Создать новую компанию</a>
+      <tr>
+        <td>1.</td>
+        <td>
+          {% if i.activated == 1%}
+          <small class="label pull-right bg-green">activated</small>
           {% endif %}
-          </div>
+        </td>
+        <td>
+          {{ i.name }}
+        </td>
+        <td>
+          {{ i.ogrn }}
+        </td>
+        <td>
+          {{ i.inn }}
+        </td>
+        <td>
+          {{ i.date_create }}
+        </td>
+        <td>
+          <a href="{% url  'company_update' i.id%}">
+            <i class="fa fa-edit"></i>
+          </a>
+        </td>
+        <td>
+          <a href="{% url  'company_update' i.id%}">
+            <i class="fa fa-users"></i>
+          </a>
+        </td>
+        <td>
+          <a href="{% url  'company_detail' i.id%}">
+            <i class="fa fa-search"></i>
+          </a>
+        </td>
+        <td>
+          <a href="{% url 'company_activated' i.id %}">
+            Активировать
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody></table>
+  </div>
+  <!-- /.box-body -->
+  {% else %}
+  <a href="{% url  'company_control' %}" type="button" class="btn btn-block btn-success btn-lg">Создать новую компанию</a>
+  {% endif %}
+</div>
 {% endblock %}

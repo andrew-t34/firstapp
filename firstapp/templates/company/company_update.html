@@ -11,8 +11,9 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form novalidate action="{% url 'company_control' %}" role="form" method="post">
+            <form enctype="multipart/form-data" novalidate action="{% url 'company_save_update' %}" role="form" method="post">
               {% csrf_token %}
+                    {{ form.id|as_crispy_field }}
               <div class="box-body">
                 <div class="row">
                   <div class="col-md-6">
@@ -45,7 +46,7 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
-                      {{ form.logo|as_crispy_field }}
+                      {{ form.logo }}
                     </div>
                   </div>
                   </div>

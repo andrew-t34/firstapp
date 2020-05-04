@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'examquestions',
     'company',
     'crispy_forms',
+    'helpers',
+
 ]
 
 MIDDLEWARE = [
@@ -152,6 +154,12 @@ MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
+
+
+# FILE_UPLOAD_HANDLERS = [
+#     'django.core.files.uploadhandler.MemoryFileUploadHandler',
+#     'django.core.files.uploadhandler.TemporaryFileUploadHandler',
+# ]
 #Настройки CKEDITOR
 CKEDITOR_CONFIGS = {
     'default': {

@@ -24,6 +24,6 @@ admin.site.register(Division, DivisionAdmin)
 
 class WorkerAdmin(admin.ModelAdmin):
     list_display = ("full_name_worker", "job_position", "snils")
-    list_filter = ("snils",)
+    list_filter = ("company",)
 
 admin.site.register(Worker, WorkerAdmin)

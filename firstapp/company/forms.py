@@ -1,6 +1,7 @@
 from django import forms
 from django.core import validators
 from django.core.exceptions import ValidationError
+# from django.core.files.uploadedfile import SimpleUploadedFile
 import re
 # from django.core.exceptions import ValidationError
 from .models import Type, Company, Division, Worker
@@ -24,8 +25,17 @@ def clean_inn(value):
         raise forms.ValidationError("Вы должны ввести число из 10 цифр")
     return value
 
+def file_size(value):
+    limit = 2 * 1024 * 1024
+    if value.size > limit:
+        raise ValidationError('Файл слишком большой. размер должен быть не более 2 MiB.')
 
 class CompanyForm(forms.Form):
+
+
+    # id = forms.IntegerField(widget=forms.HiddenInput(), label='')
+    id = forms.IntegerField(label='id', initial = 0, widget = forms.HiddenInput() )
+
 
     type_id = forms.ModelChoiceField(
         queryset = Type.objects.all(),
@@ -86,7 +96,8 @@ class CompanyForm(forms.Form):
 
     logo = forms.ImageField(
         label="Логотип компании",
-        required = False)
+        required = False,
+        validators=[file_size],)
 
     url = forms.CharField(
         label="Адрес сайта",

@@ -1,8 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.files.storage import FileSystemStorage
 # Create your models here.
 
-
+fs = FileSystemStorage(location='/media/company/logo')
 
 class Type(models.Model):
     #Градация уровня обучения
@@ -19,7 +20,7 @@ class Type(models.Model):
 class Company(models.Model):
     #Градация уровня обучения
     type = models.ForeignKey(Type, models.SET_NULL, blank=True, null=True, verbose_name="Форма собственности")
-    user = models.ForeignKey(User, models.SET_NULL, db_index = True,  blank=True, null=True, verbose_name="Пользователь")
+    user = models.ForeignKey(User, models.SET_NULL, db_index = True, related_name='type_id',  blank=True, null=True, verbose_name="Пользователь")
     name = models.CharField(max_length=100, verbose_name="Название компани")
     ogrn = models.CharField(max_length=15, verbose_name="ОГРН")
     inn = models.CharField(max_length=12, verbose_name="ИНН")
@@ -27,7 +28,7 @@ class Company(models.Model):
     url = models.URLField(max_length=50, verbose_name="Сайт компании")
     date_create = models.DateField(auto_now_add = True, verbose_name="Дата создания")
     date_updata = models.DateField(auto_now = True, verbose_name="Дата изменения")
-    logo = models.ImageField('Логотип компании',upload_to = 'company/logo/', default = '', blank = True)
+    logo = models.ImageField('Логотип компании', storage=fs, upload_to = 'company/logo/', null=True, blank = True)
     text = models.TextField(verbose_name="Текст вопроса")
     activated = models.IntegerField(default = 0, verbose_name="Активация")
 
@@ -40,7 +41,7 @@ class Company(models.Model):
     @property
     def full_name_company(self):
         "Returns the person's full name."
-        return '%s %s' % (self.type_id, self.name)
+        return '%s %s' % (self.type, self.name)
 
 
 class Division(models.Model):
@@ -69,7 +70,7 @@ class Worker(models.Model):
         verbose_name_plural = "Работники"
 
     def __str__(self):
-        return (self.full_name)
+        return (self.full_name_worker)
 
     @property
     def full_name_worker(self):
